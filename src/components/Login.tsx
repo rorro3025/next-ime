@@ -1,5 +1,6 @@
 import { ChangeEvent, useState, FormEvent } from "react";
 import { useRouter } from "next/router";
+import styles from "./Login.module.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 interface Props {
@@ -24,7 +25,7 @@ function Login({ setIsLoggedIn }: Props) {
     setLoginInfo({ ...loginInfo, [name]: value });
   };
   return (
-    <main className={"form-signin"}>
+    <main className={styles.formsignin}>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           Email
