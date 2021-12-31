@@ -5,12 +5,14 @@ import Navbar from "react-bootstrap/Navbar"
 import Nav from "react-bootstrap/Nav"
 import NavDropdown from "react-bootstrap/NavDropdown"
 import {useApp} from "../context/appContext"
+import style from "./Login.module.css"
 
 interface Props {
     children: React.ReactNode;
 }
 
 function Layout({children}: Props) {
+    // get User for adaption of navbar
     const {user} = useApp()
     return (
         <div>
@@ -32,8 +34,16 @@ function Layout({children}: Props) {
             <div style={{minHeight: "700px"}}>
                 {children}
             </div>
-            <div className="container-fluid bg-dark text-center text-white">
-                <h1>Footer</h1>
+            <div className={style.footerTop}>
+                <div className="container-fluid">
+                    <h3>Social</h3>
+                    <Image src="/img/icons_2.png" alt="social" width={"189"} height={"69"}/>
+                </div>
+            </div>
+            <div className={style.copyright}>
+                <div className="container">
+                    <p>© 2019 UNAM. Todos los derechos reservados | Facultad de Estudios Superiores Cuautitlán.</p>
+                </div>
             </div>
         </div>
     )

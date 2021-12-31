@@ -1,17 +1,18 @@
 import type {NextPage} from 'next'
 import Head from 'next/head'
 import Layout from "../components/Layout"
-import Login from "../components/Login"
+import Select from "../components/SelectExists"
 import {useApp} from "../context/appContext"
+import Welcome from "../components/UserPage"
 
 const Home: NextPage = () => {
-    const {isLoggedIn, setIsLoggedIn} = useApp()
+    const {isLoggedIn} = useApp()
     return (
         <Layout>
             <Head>
                 <title>Inicio</title>
             </Head>
-            {isLoggedIn ? <h1>Bienvenido</h1> : <Login setIsLoggedIn={setIsLoggedIn}/>}
+            {isLoggedIn ? <Welcome /> : <Select/>}
         </Layout>
     )
 }

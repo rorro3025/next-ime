@@ -1,17 +1,28 @@
 export interface Props {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }
-export interface UserA {
+
+export interface UserCreating {
     name: string,
+    matricule: string,
     email: string,
     password: string,
-    passwordConfirm: string,
+    confirmPassword: string,
     role: string
+    career?: string,
+    status?: string,
+    semester?: number,
 }
 
 export interface User {
-    id: number,
     name: string,
+    matricule: string,
     email: string,
     role: string
+    status: string,
+}
+
+export interface Student extends User {
+    career: string,
+    semester: number,
 }

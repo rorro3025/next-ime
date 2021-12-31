@@ -3,3 +3,17 @@
   padding: 15px;
   margin: auto;
 }
+.copyright{
+  text-align: center;
+  padding: 15px 0;
+  background-color: #333333;
+  color: white;
+  font-family: sans-serif;
+}
+.footerTop{
+  text-align: left;
+  padding: 15px 0;
+  background-color: #003366;
+  color: white;
+  font-family: sans-serif;
+}

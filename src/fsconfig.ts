@@ -17,5 +17,6 @@ const app = initializeApp(config)
 const auth = getAuth()
 const db = getFirestore()
 const dbGroups = collection(db,"groups")
+const dbUsers = collection(db,"users")
 
-export {app,db,dbGroups,auth}
+export {app,db,dbGroups,auth,dbUsers}
