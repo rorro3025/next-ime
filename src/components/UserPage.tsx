@@ -6,11 +6,11 @@ function UserPage() {
         <div className="container bg-light">
             <h1 className={"text-center"}>Bienvenido</h1>
             <ul>
-                <li>Nombre: {user.name}</li>
-                <li>Matricula: {user.matricule}</li>
-                <li>Rol: {user.role}</li>
-                <li>Correo:{user.email}</li>
-                <li>Verificado: {false}</li>
+                <li><strong>Nombre:</strong> {user.name}</li>
+                <li><strong>Matricula:</strong> {user.matricule}</li>
+                <li><strong>Rol:</strong> {user.role}</li>
+                <li><strong>Correo:</strong> {user.email}</li>
+                <li><strong>Verificado:</strong> {user.status}</li>
             </ul>
         </div>
     );
