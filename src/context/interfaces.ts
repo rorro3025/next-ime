@@ -7,7 +7,7 @@ export interface UserCreating {
     matricule: string,
     email: string,
     password: string,
-    confirmPassword: string,
+    passwordConfirm: string,
     role: string
     career?: string,
     status?: string,

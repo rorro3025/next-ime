@@ -11,10 +11,11 @@ export type AppContent = {
 export const AppContext = createContext<AppContent>({
   isLoggedIn: false,
   user: {
-    id: 0,
     name: "",
     email: "",
+    matricule:"",
     role: "",
+    status: "",
   },
   setIsLoggedIn: () => {},
   setUser:() =>{},

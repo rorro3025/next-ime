@@ -1,11 +1,11 @@
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
-import Navbar from "react-bootstrap/Navbar"
-import Nav from "react-bootstrap/Nav"
-import NavDropdown from "react-bootstrap/NavDropdown"
 import {useApp} from "../context/appContext"
 import style from "./Login.module.css"
+import NavUsers from "./NavUsers"
+import {ToastContainer} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
     children: React.ReactNode;
@@ -13,7 +13,7 @@ interface Props {
 
 function Layout({children}: Props) {
     // get User for adaption of navbar
-    const {user} = useApp()
+    const {isLoggedIn,user,setIsLoggedIn} = useApp()
     return (
         <div>
             <div className="container-fluid text-white" style={{backgroundColor: "#003366"}}>
@@ -23,14 +23,10 @@ function Layout({children}: Props) {
                     </a>
                 </Link>
             </div>
-            <Navbar bg={"light"} expand={"lg"}>
-                <Nav>
-                    <NavDropdown title={"Registrarme"} id={"menu1"} className={"justify-content-end"}>
-                        <NavDropdown.Item>Profesor</NavDropdown.Item>
-                        <NavDropdown.Item>Alumno</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-            </Navbar>
+            <ToastContainer/>
+            {isLoggedIn?
+                <NavUsers role={user.role} setSession={setIsLoggedIn}/>:null
+            }
             <div style={{minHeight: "700px"}}>
                 {children}
             </div>
