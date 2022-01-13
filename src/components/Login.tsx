@@ -5,6 +5,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { User } from "../context/interfaces";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../fsconfig";
+import { BiUserCircle } from "react-icons/Bi";
+import {CgPassword} from "react-icons/cg";
 
 // props: definition of the props that are passed to this component
 interface Props {
@@ -65,35 +67,41 @@ function Login({ setIsLoggedIn, setMessage, setVisibility, setUser }: Props) {
     setLoginInfo({ ...loginInfo, [name]: value });
   };
   return (
-    <main className={styles.formsignin}>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          Email
-          <input
-            type="email"
-            name="email"
-            className={"form-control my-2"}
-            placeholder={"example@mail.com"}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          Password
-          <input
-            type="password"
-            name="password"
-            className={"form-control my-2"}
-            placeholder="password"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="d-grid gap-2">
-          <input type="submit" value="Sing In" className={"btn btn-success"} />
-        </div>
-      </form>
-    </main>
+      <div className={"container"}>
+        <h1 className={"text-center text-secondary my-3"}>
+          Inicio de sesión
+        </h1>
+        <main className={styles.formsignin}>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <h4><BiUserCircle /> Email</h4>
+              <input
+                  type="email"
+                  name="email"
+                  className={"form-control my-2"}
+                  placeholder={"example@mail.com"}
+                  onChange={handleChange}
+                  required
+              />
+            </div>
+            <div className="form-group">
+              <h4><CgPassword /> Password</h4>
+              <input
+                  type="password"
+                  name="password"
+                  className={"form-control my-2"}
+                  placeholder="password"
+                  onChange={handleChange}
+                  required
+              />
+            </div>
+            <div className="d-grid gap-2">
+              <input type="submit" value="Sing In" className={"btn btn-success"} />
+            </div>
+          </form>
+          <p className={"text-info text-center mt-2"}>Olvide mi contraseña</p>
+        </main>
+      </div>
   );
 }
 

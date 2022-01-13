@@ -25,7 +25,7 @@ const usersManagement: NextPage = () => {
           {visibility && <Message message={messageText} />}
           <select
             onChange={handleChange}
-            className={"form-control"}
+            className={"form-control bg-info"}
             defaultValue={"student"}
           >
             <option value="admin">Administrador</option>

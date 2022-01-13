@@ -76,6 +76,7 @@ function SingUp({type, setMessageText, setVisibility}: Props) {
                     saveUserInfo(userInfo,id).then(() => {
                         toast.success(id)
                         setVisibility(false)
+                        setUserInfo(initialState)
                     })
                 })
                 .catch(err => {
