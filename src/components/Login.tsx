@@ -2,18 +2,18 @@ import { ChangeEvent, useState, FormEvent } from "react";
 import styles from "./Login.module.css";
 import { auth } from "../fsconfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { User } from "../context/interfaces";
+import { User, Student } from "../context/interfaces";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../fsconfig";
-import { BiUserCircle } from "react-icons/Bi";
-import {CgPassword} from "react-icons/cg";
+import { BiUserCircle } from "react-icons/bi";
+import { CgPassword } from "react-icons/cg";
 
 // props: definition of the props that are passed to this component
 interface Props {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
   setMessage: (message: string) => void;
   setVisibility: (visibility: boolean) => void;
-  setUser: (user: User) => void;
+  setUser: (user: User | Student) => void;
 }
 
 function Login({ setIsLoggedIn, setMessage, setVisibility, setUser }: Props) {
@@ -30,16 +30,28 @@ function Login({ setIsLoggedIn, setMessage, setVisibility, setUser }: Props) {
     let docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       let data = docSnap.data();
-      setUser({
-        name: data.name,
-        matricule: data.matricule,
-        email: data.email,
-        role: data.role,
-        status: data.status,
-      });
+      if (data.role === "student") {
+        setUser({
+          name: data.name,
+          matricule: data.matricule,
+          email: data.email,
+          role: data.role,
+          status: data.status,
+          career: data.career,
+          semester: data.semester,
+        });
+      } else {
+        setUser({
+          name: data.name,
+          matricule: data.matricule,
+          email: data.email,
+          role: data.role,
+          status: data.status,
+        });
+      }
     }
   };
-  
+
   // handle the change of the input fields
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,42 +78,49 @@ function Login({ setIsLoggedIn, setMessage, setVisibility, setUser }: Props) {
     let { name, value } = event.target;
     setLoginInfo({ ...loginInfo, [name]: value });
   };
+
   return (
-      <div className={"container"}>
-        <h1 className={"text-center text-secondary my-3"}>
-          Inicio de sesión
-        </h1>
-        <main className={styles.formsignin}>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <h4><BiUserCircle /> Email</h4>
-              <input
-                  type="email"
-                  name="email"
-                  className={"form-control my-2"}
-                  placeholder={"example@mail.com"}
-                  onChange={handleChange}
-                  required
-              />
-            </div>
-            <div className="form-group">
-              <h4><CgPassword /> Password</h4>
-              <input
-                  type="password"
-                  name="password"
-                  className={"form-control my-2"}
-                  placeholder="password"
-                  onChange={handleChange}
-                  required
-              />
-            </div>
-            <div className="d-grid gap-2">
-              <input type="submit" value="Sing In" className={"btn btn-success"} />
-            </div>
-          </form>
-          <p className={"text-info text-center mt-2"}>Olvide mi contraseña</p>
-        </main>
-      </div>
+    <div className={"container"}>
+      <h1 className={"text-center text-secondary my-3"}>Inicio de sesión</h1>
+      <main className={styles.formsignin}>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <h4>
+              <BiUserCircle /> Email
+            </h4>
+            <input
+              type="email"
+              name="email"
+              className={"form-control my-2"}
+              placeholder={"example@mail.com"}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <h4>
+              <CgPassword /> Password
+            </h4>
+            <input
+              type="password"
+              name="password"
+              className={"form-control my-2"}
+              placeholder="password"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="d-grid gap-2">
+            <input
+              type="submit"
+              value="Sing In"
+              className={"btn btn-success"}
+            />
+          </div>
+        </form>
+        <p className={"text-info text-center mt-2"}>Olvide mi contraseña</p>
+      </main>
+    </div>
   );
 }
 

@@ -19,28 +19,30 @@ const usersManagement: NextPage = () => {
       <Head>
         <title>Admin Users</title>
       </Head>
-      {user.role === "admin" ? (
-        <>
-          <h1 className="text-center">Creación de usuarios</h1>
-          {visibility && <Message message={messageText} />}
-          <select
-            onChange={handleChange}
-            className={"form-control bg-info"}
-            defaultValue={"student"}
-          >
-            <option value="admin">Administrador</option>
-            <option value="student">Estudiante</option>
-            <option value="professor">Profesor</option>
-          </select>
-          <SingUp
-            type={userType}
-            setVisibility={setVisibility}
-            setMessageText={setMessageText}
-          />{" "}
-        </>
-      ) : (
-        <h1 className="text-center text-danger mt-3">Accesso denegado</h1>
-      )}
+      <div className="container mt-3">
+        {user.role === "admin" ? (
+          <>
+            <h1 className="text-center">Creación de usuarios</h1>
+            {visibility && <Message message={messageText} />}
+            <select
+              onChange={handleChange}
+              className={"form-control bg-info"}
+              defaultValue={"student"}
+            >
+              <option value="admin">Administrador</option>
+              <option value="student">Estudiante</option>
+              <option value="professor">Profesor</option>
+            </select>
+            <SingUp
+              type={userType}
+              setVisibility={setVisibility}
+              setMessageText={setMessageText}
+            />{" "}
+          </>
+        ) : (
+          <h1 className="text-center text-danger mt-3">Accesso denegado</h1>
+        )}
+      </div>
     </Layout>
   );
 };

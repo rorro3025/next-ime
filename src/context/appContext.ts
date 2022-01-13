@@ -1,11 +1,11 @@
 import { useContext, createContext } from "react";
-import {User} from "./interfaces";
+import { Student, User } from "./interfaces";
 
 export type AppContent = {
   isLoggedIn: boolean;
-  user: User
+  user: User | Student;
   setIsLoggedIn: (isLoggedIn: boolean) => void;
-  setUser : (u:User ) => void;
+  setUser: (u: User | Student) => void;
 };
 
 export const AppContext = createContext<AppContent>({
@@ -13,11 +13,13 @@ export const AppContext = createContext<AppContent>({
   user: {
     name: "",
     email: "",
-    matricule:"",
+    matricule: "",
     role: "",
     status: "",
+    semester: 0,
+    career:""
   },
   setIsLoggedIn: () => {},
-  setUser:() =>{},
+  setUser: () => {},
 });
 export const useApp = () => useContext(AppContext);

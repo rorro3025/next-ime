@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import type {AppProps} from "next/app";
 import {useState} from "react";
 import {AppContext} from "../context/appContext";
-import {User} from "../context/interfaces";
+import {Student, User} from "../context/interfaces";
 import {auth} from "../fsconfig";
 
 function MyApp({Component, pageProps}: AppProps) {
@@ -25,10 +25,12 @@ function MyApp({Component, pageProps}: AppProps) {
             email: current.email,
             role: "student",
             status: "online",
+            career: "",
+            semester: 0,
         };
     }
     const [isLoggedIn, setIsLoggedIn] = useState(session);
-    const [user, setUser] = useState<User>(initialState);
+    const [user, setUser] = useState<User|Student>(initialState);
     return (
         <AppContext.Provider value={{isLoggedIn, setIsLoggedIn, user, setUser}}>
             <Component {...pageProps} />
