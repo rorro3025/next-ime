@@ -18,7 +18,7 @@ function SingUp({type, setMessageText, setVisibility}: Props) {
     const semesterText = ["Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto", "Septimo", "Octavo", "Noveno", "Decimo"];
     const initialState: UserCreating = {
         name: "",
-        matricule: "",
+        enrollment: "",
         email: "",
         password: "",
         career: "Ingenieria Mecanica y Electrica",
@@ -35,7 +35,7 @@ function SingUp({type, setMessageText, setVisibility}: Props) {
         if (user.role === "student") {
             const dataObj: Student = {
                 name: user.name,
-                matricule: user.matricule,
+                enrollment: user.enrollment,
                 email: user.email,
                 career: user.career ? user.career : "",
                 semester: user.semester ? user.semester : 0,
@@ -46,7 +46,7 @@ function SingUp({type, setMessageText, setVisibility}: Props) {
         } else {
             const dataObj: User = {
                 name: user.name,
-                matricule: user.matricule,
+                enrollment: user.enrollment,
                 email: user.email,
                 role: type,
                 status: "active"
@@ -105,7 +105,7 @@ function SingUp({type, setMessageText, setVisibility}: Props) {
                        onChange={handleChange}/>
                 <label htmlFor={type == "student" ? "account" : "rfc"}
                        className="form-label">{type == "student" ? "Numero de cuenta" : "RFC"}</label>
-                <input type="text" name="matricule"
+                <input type="text" name="enrollment"
                        placeholder={type == "student" ? "account" : "rfc"} className={"form-control my-2"}
                        onChange={handleChange}/>
                 <label htmlFor="email" className="form-label">Email</label>

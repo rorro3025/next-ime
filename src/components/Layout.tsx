@@ -6,10 +6,7 @@ import style from "./Login.module.css"
 import NavUsers from "./NavUsers"
 import {ToastContainer} from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-
-interface Props {
-    children: React.ReactNode;
-}
+import {Props} from "../context/interfaces"
 
 function Layout({children}: Props) {
     // get User for adaption of navbar

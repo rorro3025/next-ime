@@ -31,11 +31,16 @@ function navUsers({ role, setSession }: Props) {
               </Link>
             </li>
             {role === "admin" ? (
-              <li className="nav-item">
+             <>
+            <li className="nav-item">
                 <Link href={"/usersManagement"}>
-                  <a className="nav-link">Crear algo</a>
+                  <a className="nav-link">Registro de usuarios</a>
                 </Link>
-              </li>
+              </li> <li className="nav-item">
+                <Link href={"/manageGroups"}>
+                  <a className="nav-link">Administracion de grupos</a>
+                </Link>
+              </li></> 
             ) : null}
             {role === "student" ? (
               <li className="nav-item">

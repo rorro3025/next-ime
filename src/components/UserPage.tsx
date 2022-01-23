@@ -1,6 +1,5 @@
 import { useApp } from "../context/appContext";
 import Image from "next/image";
-import { Student, User } from "../context/interfaces";
 
 function UserPage() {
   const { user } = useApp();
@@ -23,9 +22,15 @@ function UserPage() {
               <li className={"list-group-item"}>
                 <strong>Nombre:</strong> {user.name}
               </li>
-              <li className={"list-group-item"}>
-                <strong>Matricula:</strong> {user.matricule}
-              </li>
+                {user.role == "student" ? (
+                        <li className={"list-group-item"}>
+                    <strong>Matricula:</strong> {user.enrollment}
+                        </li>
+                ):(
+                    <li className={"list-group-item"}>
+                  <strong>RFC:</strong> {user.enrollment}
+                  </li>
+                  )}
               <li className={"list-group-item"}>
                 <strong>Rol:</strong> {user.role}
               </li>
