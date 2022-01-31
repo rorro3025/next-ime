@@ -13,7 +13,7 @@ export const AppContext = createContext<AppContent>({
   user: {
     name: "",
     email: "",
-    matricule: "",
+    enrollment: "",
     role: "",
     status: "",
     semester: 0,

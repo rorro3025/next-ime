@@ -1,5 +1,5 @@
 import { dbGroups } from "../fsconfig";
-import { onSnapshot, query, where } from "firebase/firestore";
+import { onSnapshot, query, where, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { Assignment } from "../context/interfaces";
 
@@ -9,8 +9,13 @@ interface Props {
 
 function ListGroups({ semester }: Props) {
   const [groups, setGroups] = useState<Assignment[]>([]);
+  const getAllData = async () =>{
+    const querySnapshot = await getDocs(dbGroups);
+    const data = querySnapshot.docs.map(doc => doc.data());
+    console.log(data);
+  }
   useEffect(() => {
-    const q = query(dbGroups, where("Semestre", "==", semester.toString()));
+    const q = query(dbGroups, where("Semestre", "==", ""));
     const data = onSnapshot(q, (snapshot) => {
       const list: any = [];
       snapshot.forEach((doc) => {
@@ -22,9 +27,11 @@ function ListGroups({ semester }: Props) {
       console.log(list,semester);
     });
   }, []);
+
   return (
     <div className="container">
       <h1>List Groups</h1>
+      <button className={"btn btn-info mx-5"} onClick={getAllData}>Get data</button>
       <table>
         <thead>
           <tr>

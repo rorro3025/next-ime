@@ -5,7 +5,7 @@ import TableList from "../components/GroupsTable";
 const ManageGroups: NextPage = () => {
   return (
     <Layout>
-      <h1>Manage Groups</h1>
+      <h2 className={"text-center"}>Manage Groups</h2>
       <TableList semester={6} />
     </Layout>
   );
