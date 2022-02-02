@@ -9,12 +9,12 @@ interface Props {
 
 function ListGroups({ semester }: Props) {
   const [groups, setGroups] = useState<Assignment[]>([]);
-  const getAllData = async () =>{
+  const getAllData = async () => {
     const querySnapshot = await getDocs(dbGroups);
-    const data = querySnapshot.docs.map(doc => doc.data());
+    const data = querySnapshot.docs.map((doc) => doc.data());
     console.log(data);
-  }
-  useEffect(() => {
+  };
+  const getGroupsBySemester = async () => {
     const q = query(dbGroups, where("Semestre", "==", ""));
     const data = onSnapshot(q, (snapshot) => {
       const list: any = [];
@@ -24,14 +24,17 @@ function ListGroups({ semester }: Props) {
           ...doc.data(),
         });
       });
-      console.log(list,semester);
+      console.log(list, semester);
     });
-  }, []);
+  };
+  useEffect(() => {}, []);
 
   return (
     <div className="container">
       <h1>List Groups</h1>
-      <button className={"btn btn-info mx-5"} onClick={getAllData}>Get data</button>
+      <button className={"btn btn-info mx-5"} onClick={getAllData}>
+        Get data
+      </button>
       <table>
         <thead>
           <tr>

@@ -8,7 +8,7 @@ function GroupsTableAdminn() {
   const deleteGroup = async (id: string) => {
     // await dbGroups.doc(id).delete();
     // setList(list.filter((group) => group.id !== id));
-    alert("Delete group "+ id);
+    alert("Delete group " + id);
   };
   const getAllData = async () => {
     const snapshot = await getDocs(dbGroups);
@@ -31,7 +31,7 @@ function GroupsTableAdminn() {
   return (
     <div className="container">
       <h1 className="text-center">Asignatiras registradas</h1>
-      <table className="table table-dark table-striped mt-3">
+      <table className="table table-hover table-striped mt-3">
         <thead>
           <tr>
             <th>Clave</th>
@@ -50,7 +50,10 @@ function GroupsTableAdminn() {
               <td>{group.semester}</td>
               <td>
                 <button className="btn btn-info btn-sm mx-2">Consultar</button>
-                <button className="btn btn-danger btn-sm mx-2" onClick={()=>deleteGroup(group.id)}>
+                <button
+                  className="btn btn-danger btn-sm mx-2"
+                  onClick={() => deleteGroup(group.id)}
+                >
                   Eliminar
                 </button>
               </td>
