@@ -1,10 +1,10 @@
 import { dbGroups } from "../fsconfig";
-import { onSnapshot, query, where, getDocs } from "firebase/firestore";
+import { query, where, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { Assignment } from "../context/interfaces";
 
 interface Props {
-  semester: number;
+  semester: string;
 }
 
 function ListGroups({ semester }: Props) {
@@ -15,40 +15,52 @@ function ListGroups({ semester }: Props) {
     console.log(data);
   };
   const getGroupsBySemester = async () => {
-    const q = query(dbGroups, where("Semestre", "==", ""));
-    const data = onSnapshot(q, (snapshot) => {
-      const list: any = [];
-      snapshot.forEach((doc) => {
-        list.push({
-          id: doc.id,
-          ...doc.data(),
-        });
+    const q = query(dbGroups, where("Semestre", "==", semester));
+    const snapshot = await getDocs(q);
+    let temp: any = [];
+    snapshot.forEach((doc) => {
+      temp.push({
+        id: doc.id,
+        ...doc.data(),
       });
-      console.log(list, semester);
     });
+    let data: Assignment[] = temp.map((group: any) => ({
+      id: group.id,
+      key: group.Clave,
+      room: group.Aula,
+      name: group.Nombre,
+      semester: group.Semestre,
+      credits: group.Creditos,
+      group: group.Grupo,
+      description: "Some description",
+    }));
+    console.log(temp);
+    setGroups(data);
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getGroupsBySemester().catch(null);
+  }, []);
 
   return (
     <div className="container">
-      <h1>List Groups</h1>
-      <button className={"btn btn-info mx-5"} onClick={getAllData}>
-        Get data
-      </button>
-      <table>
+      <table className="table table-hover table-striped">
         <thead>
           <tr>
             <th>Group Name</th>
             <th>Group Description</th>
             <th>Group Credits</th>
+            <th>Room</th>
+            <th>Group</th>
           </tr>
         </thead>
         <tbody>
-          {groups.map((group, index) => (
-            <tr key={index}>
+          {groups.map((group) => (
+            <tr key={group.id}>
               <td>{group.name}</td>
               <td>{group.description}</td>
               <td>{group.credits}</td>
+              <td>{group.room}</td>
+              <td>{group.group}</td>
             </tr>
           ))}
         </tbody>

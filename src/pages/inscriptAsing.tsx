@@ -5,6 +5,7 @@ import TableList from "../components/GroupsTable";
 
 const AsignatureIns: NextPage = () => {
   const { user } = useApp();
+  console.log(user);
   return (
     <Layout>
       <div className="container mt-3">
@@ -12,7 +13,7 @@ const AsignatureIns: NextPage = () => {
       </div>
       <div className="container">
         {user.role === "student" ? (
-          <TableList semester={5} />
+          <TableList semester={user.semester?user.semester:"0"} />
         ) : (
           <h1 className="text-danger text-center mt-3">Acceso denegado</h1>
         )}
